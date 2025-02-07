@@ -1,0 +1,98 @@
+{
+    "name": "DDSM Counter_align",
+    "seed": 140,
+    "gpu": "4",
+    "if_ccce_match_att": false,
+    "i2a_clser": {
+        "arch": "DDSM_I2A_feat_clser",
+        "in_dim": 16,
+        "loss": "multitasks_celoss",
+        "lr": 0.001,
+        "subepochs": 150,
+        "monitor": "max val_i2a_avg_acc",
+        "metrics": [
+            "multitasks_avg_accuracy"
+        ],
+        "losses": [
+            "multitasks_celoss"
+        ]
+    },
+    "i2a_atter": {
+        "arch": "DDSM_I2A_atter",
+        "in_dim": 16,
+        "loss": "align_loss",
+        "lr": 0.0005,
+        "subepochs": 150,
+        "monitor": "max val_i2a_dice",
+        "metrics": [
+            "precision",
+            "recall",
+            "dice_score"
+        ],
+        "losses": [
+            "inside_nod_loss",
+            "beyond_nod_loss",
+            "align_ratio"
+        ],
+        "rtol": 0.1,
+        "maxiter": 10000.0,
+        "lamb": 0.07
+    },
+    "a2l_clser": {
+        "arch": "DDSM_A2L_clser",
+        "in_dim": 96,
+        "loss": "malign_celoss",
+        "lr": 0.001,
+        "subepochs": 150,
+        "monitor": "min val_a2l_celoss",
+        "metrics": [
+            "accuracy"
+        ],
+        "losses": [
+            "malign_celoss"
+        ]
+    },
+    "a2l_atter": {
+        "arch": "DDSM_A2L_feat_atter",
+        "in_dim": 96,
+        "extend_dim": 32,
+        "out_dim": 6,
+        "C": 16,
+        "loss": "align_loss",
+        "lr": 0.001,
+        "subepochs": 35,
+        "monitor": "max val_ccce_acc",
+        "metrics": [
+            "ccce_acc"
+        ],
+        "losses": [
+            "inside_nod_loss",
+            "beyond_nod_loss",
+            "align_ratio",
+            "align_loss"
+        ],
+        "rtol": 0.1,
+        "maxiter": 10000.0,
+        "lamb": 0.0005,
+        "ratio": 1.0,
+        "thresh_hold": 0.15
+    },
+    "trainer": {
+        "type": "WholeTrainer",
+        "args": {
+            "epochs": 10,
+            "save_dir": "/data/lijingwen/CounterAlign_output/hierachical_model/DDSM",
+            "code_source": "/home/lijingwen/Projects/Counter_align/DDSM",
+            "tensorboard": true,
+            "if_ccce_match_att": 1
+        }
+    },
+    "data_loader": {
+        "type": "DDSMpt_DataLoader",
+        "args": {
+            "cache_path": "/data/lijingwen/CounterAlign_output/encoder_DDSM/AE_8-16/BIG-JIT112-CROSS_5e-03/240513_141949_122/cache",
+            "ccce_file": "/data/lijingwen/preprocess_DDSM/02_PROCESSED/lidcfull_causal_scores_top5.csv",
+            "batch_size": 64
+        }
+    }
+}

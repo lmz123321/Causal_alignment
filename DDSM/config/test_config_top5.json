@@ -1,0 +1,57 @@
+{
+  "name": "alignment loss",
+  "gpu": 1,
+  "seed": 140,
+  "debug": false,
+  "i2a_clser": {
+     "arch": "DDSM_I2A_feat_clser",
+    "in_dim": 16,
+    "checkpoint_path": "/data/lijingwen/CounterAlign_output/hierachical_model/DDSM/240706_222702_140_4/models/i2a_clser/i2a_cls_epoch:2_best.pt",
+    "metrics": ["multitasks_avg_accuracy"]
+  },
+  "i2a_atter": {
+    "arch": "DDSM_I2A_atter",
+    "in_dim": 16,
+    "checkpoint_path": "/data/lijingwen/CounterAlign_output/hierachical_model/DDSM/240706_222702_140_4/models/i2a_atter/i2a_att_epoch:1_best.pt",
+    "metrics": ["precision", "recall", "dice_score"]
+
+  },
+  "a2l_clser": {
+    "arch": "DDSM_A2L_clser",
+    "in_dim": 96,
+    "checkpoint_path": "/data/lijingwen/CounterAlign_output/hierachical_model/DDSM/240706_222702_140_4/models/a2l_clser/a2l_cls_epoch:2_best.pt",
+    "metrics": ["accuracy"]
+  },
+  "a2l_atter": {
+    "arch": "DDSM_A2L_feat_atter",
+   "in_dim": 96,
+    "extend_dim": 32,
+    "out_dim": 6,
+    "C": 16,
+    "checkpoint_path": "/data/lijingwen/CounterAlign_output/hierachical_model/DDSM/240706_222702_140_4/models/a2l_atter/a2l_att_epoch:1_best.pt",
+    "metrics": ["ccce_acc","precision"],
+    "thresh_hold": 0.15
+  },
+   "trainer": {
+     "type": "WholeTester",
+     "args": {
+            "save_dir": "/data/lijingwen/CounterAlign_output/hierachical_model/DDSM",
+            "code_source": "/home/lijingwen/Projects/Counter_align/DDSM",
+            "tensorboard": true,
+            "if_ccce_match_att": 1
+        }
+
+    },
+   "data_loader": {
+    "type": "DDSMpt_DataLoader",
+    "args": {
+      "cache_path":"/data/lijingwen/CounterAlign_output/encoder_DDSM/AE_8-16/BIG-JIT112-CROSS_5e-03/240513_141949_122/cache" ,
+      "ccce_file":"/data/lijingwen/preprocess_DDSM/02_PROCESSED/lidcfull_causal_scores_top5.csv" ,
+      "batch_size": 64
+    }
+  }
+  }
+
+
+
+

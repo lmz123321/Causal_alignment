@@ -1,0 +1,12 @@
+matplotlib==3.7.5
+networkx==3.1
+numpy==1.24.4
+numpy==1.24.3
+pandas==2.0.3
+python==3.8.18
+python_igraph==0.11.8
+torch==1.13.0+cu117
+torch-geometric==2.5.3
+torchvision==0.14.0+cu117
+torchopt==0.7.0
+tqdm==4.66.2
