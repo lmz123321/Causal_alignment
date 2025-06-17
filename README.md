@@ -74,7 +74,7 @@ Please make sure your Python version is consistent with the Pytorch, Torch Geome
 
 Stores mass attributes ccce score csv(cite from **Conditional Counterfactual Causal Effect for Individual Attribution**) 
 
-Code for CCCE ```https://github.com/LLily0703/CCCE```
+Code for CCCE https://github.com/LLily0703/CCCE
 
 ##### DDSM Data Preprocess code
 
