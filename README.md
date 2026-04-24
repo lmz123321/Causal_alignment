@@ -88,7 +88,7 @@ Code for CCCE https://github.com/LLily0703/CCCE
 
 - auto encoder get latent code
 
-  get DDSM image latent code by auto encoder
+  get DDSM image latent code by auto encoder (Call `python3 train.py -c autoencoder_vanilla.json -id ${runid} -seed ${seed} -d ${device}`)
 
 ##### LIDC Data Preprocess code
 
@@ -98,5 +98,5 @@ Code for CCCE https://github.com/LLily0703/CCCE
 
 - auto encoder get latent code
 
-  get DDSM image latent code by auto encoder
+  get DDSM image latent code by auto encoder (Call `python3 train.py -c autoencoder_vanilla.json -id ${runid} -seed ${seed} -d ${device}`)
 
