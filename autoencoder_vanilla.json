@@ -1,0 +1,50 @@
+{
+    "name": "autoencoder vanilla",
+    "n_gpu": 1,
+    "seed": 120,
+    "arch": {
+        "type": "AE_Vanilla",
+        "args": {
+            "in_channels": 1,
+            "hidden_dims": [32,64,128,256]
+        }
+    },
+    "data_loader": {
+        "type": "ACEDataLoader",
+        "args": {
+            "data_dir": "/data/liumingzhou/CounterAlign_output/preprocess/multiple_slices/mindiam7_pad25_jit20_randplaced_crossmark",
+            "batch_size": 128,
+            "img_size": 96
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 0.005
+        }
+    },
+    "loss": "mse_loss",
+    "metrics": [],
+    "lr_scheduler": {},
+    "trainer": {
+        "type": "AceTrainer",
+        "args": {
+                "epochs": 700,
+                "save_dir": "/data/liumingzhou/CounterAlign_output/auto_encoder",
+                "code_source": "/home/liumingzhou/Projects/Counter_align/lidc/causal_align",
+                "save_period": 100,
+                "monitor": "min val_loss",
+                "early_stop": 30,
+                "tensorboard": true
+        }
+    },
+    "to_monitor": {
+            "seed": "seed",
+            "data_loader,batch_size": "bs",
+            "optimizer,args,lr": "lr"
+        },
+    "tensorboard": {
+      "num_show": 25,
+      "plot_size": 1.5
+    }
+}
